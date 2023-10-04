@@ -1,18 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useRef } from "react";
 import SubMenu from "./SubMenu";
 import { motion } from "framer-motion";
 
 // * React icons
 import { IoIosArrowBack } from "react-icons/io";
-import { SlSettings } from "react-icons/sl";
+import { SlNotebook, SlSettings } from "react-icons/sl";
 import { AiOutlineAppstore } from "react-icons/ai";
-import { BsPerson } from "react-icons/bs";
+import {  BsChat, BsPerson } from "react-icons/bs";
 import { HiOutlineDatabase } from "react-icons/hi";
-import { TbReportAnalytics } from "react-icons/tb";
-import { RiBuilding3Line } from "react-icons/ri";
+import {  TbReportAnalytics } from "react-icons/tb";
+import { RiBuilding3Line, RiProductHuntFill } from "react-icons/ri";
 import { NavLink, useLocation } from "react-router-dom";
 import { dashboardContext } from "../../context/Dashboard";
+import { MdVerticalDistribute } from "react-icons/md";
 
 const Sidebar = () => {
   const {sidebarOpen, setSidebarOpen, isTablet} = useContext(dashboardContext)
@@ -86,7 +87,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="dark:!text-gray-100 dark:!bg-slate-700 !bg-white">
+    <div className="dark:!text-gray-100 dark:!bg-slate-800 !bg-white relative">
       <div
         onClick={() => overlayClicked()}
         className={`md:hidden fixed inset-0 max-h-screen z-[998] bg-gray-500  opacity-30 ${
@@ -101,23 +102,25 @@ const Sidebar = () => {
         variants={Nav_animation}
         initial={{ x: isTablet ? -250 : 0 }}
         animate={sidebarOpen ? "open" : "closed"}
-        className="shadow-xl md:z-[0] z-[9999] max-w-[16rem]  w-[16rem] 
-            overflow-hidden md:sticky md:top-0 fixed top-0 
-           h-screen  dark:!text-gray-100 dark:!bg-slate-700 !bg-white"
+        className="shadow-xl md:z-[9] z-[9999] max-w-[16rem]  w-[16rem] 
+             fixed top-0 left-0
+           h-screen  dark:!text-gray-100 dark:!bg-slate-800 !bg-white"
       >
 
-
-        <div className="flex items-center gap-2.5 font-medium border-b py-3 dark:border-slate-600 border-slate-300  mx-3  md:hidden">
+        <div className="flex items-center gap-2.5 font-medium border-b py-4 dark:border-slate-600 border-slate-300 md:mx-0  mx-3 md:py-10 md:bg-lighten dark:md:bg-slate-800" >
+          
           <img
+          className="md:hidden"
             src="https://img.icons8.com/color/512/firebase.png"
             width={35}
             alt=""
           />
-          <span className="text-xl whitespace-pre">Fireboard</span>
+          <span className="text-xl whitespace-pre md:hidden">Fireboard</span>
         </div>
 
         <div className="flex flex-col  h-full">
-          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1  font-medium overflow-x-hidden scrollbar-thin scrollbar-track-white scrollbar-thumb-slate-100   md:h-[68%] h-[70%]">
+
+          <ul className="whitespace-pre px-2.5 text-[0.9rem] py-5 flex flex-col gap-1 overflow-x-hidden  font-medium  scrollbar-thin dark:scrollbar-track-slate-400  scrollbar-track-white scrollbar-thumb-slate-100 dark:scrollbar-thumb-slate-700  md:h-[78%] h-[75%]">
             <li>
               <NavLink to={"/"} className="link">
                 <AiOutlineAppstore size={23} className="min-w-max" />
@@ -136,19 +139,53 @@ const Sidebar = () => {
                 Stroage
               </NavLink>
             </li>
+            {/* test routeless */}
+            <li>
+              <NavLink to={"/post"} className="link">
+                <SlNotebook size={23} className="min-w-max" />
+                Post
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/product"} className="link">
+                <RiProductHuntFill size={23} className="min-w-max" />
+                Product
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/table"} className="link">
+                <MdVerticalDistribute size={23} className="min-w-max" />
+                Table
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={"/message"} className="link">
+                <BsChat size={23} className="min-w-max" />
+                Chat
+              </NavLink>
+            </li>
+            
+           
+           
+            
+           
+          
 
-            {(sidebarOpen || isTablet) && (
+            {/* {(sidebarOpen || isTablet) && ( */}
               <div className="border-y py-5 dark:border-slate-600 md:border-slate-300 ">
+                {
+                  (sidebarOpen || isTablet) && 
                 <small className="pl-3 text-slate-500 inline-block mb-2">
                   Product categories
                 </small>
+                }
                 {subMenusList?.map((menu) => (
                   <div key={menu.name} className="flex flex-col gap-1">
                     <SubMenu data={menu} />
                   </div>
                 ))}
               </div>
-            )}
+            {/* )} */}
             <li>
               <NavLink to={"/settings"} className="link">
                 <SlSettings size={23} className="min-w-max" />
@@ -156,6 +193,14 @@ const Sidebar = () => {
               </NavLink>
             </li>
           </ul>
+
+
+
+
+
+
+
+
           {sidebarOpen && (
             <div className="flex-1 text-sm z-50  max-h-48 my-auto  whitespace-pre   w-full  font-medium  ">
               <div className="flex border-y dark:border-slate-600 border-slate-300 p-4 items-center justify-between">
@@ -187,12 +232,12 @@ const Sidebar = () => {
                 }
               : {
                   x: -10,
-                  y: -100,
+                  y: 50,
                   rotate: 180,
                 }
           }
           transition={{ duration: 0 }}
-          className="absolute w-fit h-fit md:block z-50  right-2 bottom-3 cursor-pointer bg-blue-50 dark:text-black rounded-full p-2"
+          className="absolute w-fit h-fit hidden md:block z-50  right-2 bottom-24 cursor-pointer bg-blue-50 dark:text-black rounded-full p-2 my-auto"
         >
           <IoIosArrowBack size={25} />
         </motion.div>

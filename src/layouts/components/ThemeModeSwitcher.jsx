@@ -3,13 +3,6 @@ import useColorMode from '../../hooks/useColorMode';
 const ThemeModeSwitcher = () => {
   const [colorMode, setColorMode] = useColorMode();
 
-//   onClick={()=>{
-//     if (typeof setColorMode === 'function') {
-//         setColorMode(colorMode === 'light' ? 'dark' : 'light');
-//       }
-//   }}
-
-
   return (
     <div className='h-6 relative' >
       <label

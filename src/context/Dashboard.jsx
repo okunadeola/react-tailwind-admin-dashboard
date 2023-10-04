@@ -1,4 +1,7 @@
 import { createContext, useState } from "react";
+import React from 'react'
+import { useMediaQuery } from "react-responsive";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 
 
@@ -6,13 +9,11 @@ import { createContext, useState } from "react";
 export const dashboardContext = createContext()
 
 
-import React from 'react'
-import { useMediaQuery } from "react-responsive";
 
 const DashboardContext = ({children}) => {
     let isTablet = useMediaQuery({ query: "(max-width: 768px)" });
     const [sidebarOpen, setSidebarOpen] = useState(isTablet ? false : true)
-
+    const fullscreenHandler = useFullScreenHandle();
 
 
     const toggleSideBar = ()=>{
@@ -23,7 +24,7 @@ const DashboardContext = ({children}) => {
 
 
   return (
-    <dashboardContext.Provider value={{sidebarOpen, setSidebarOpen, toggleSideBar, isTablet}}>
+    <dashboardContext.Provider value={{sidebarOpen, setSidebarOpen, toggleSideBar, isTablet, fullscreenHandler}}>
        {children}
     </dashboardContext.Provider>
   )

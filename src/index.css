@@ -6,14 +6,14 @@
 
 @layer base {
   html {
-    @apply font-Montserrat;
+    @apply font-Montserrat dark:!text-gray-100 dark:!bg-slate-800 !bg-white ;
   }
 
   /* body {
     @apply dark:bg-gray-500 bg-white dark:text-white text-black
   } */
   body {
-   background: #f1f1f1;
+  @apply  bg-lighten dark:!text-gray-100 dark:!bg-slate-800;
   }
 
 
