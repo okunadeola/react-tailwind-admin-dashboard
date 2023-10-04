@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "deploy" : "gh-pages -d dist"
 
   },
   "dependencies": {
@@ -31,5 +31,5 @@
     "tailwindcss": "^3.2.7",
     "vite": "^4.1.0"
   },
-  "homepage": "http://okunadeola.github.io/react-tailwind-admin-dashboard"
+  "homepage": "https://okunadeola.github.io/react-tailwind-admin-dashboard"
 }
